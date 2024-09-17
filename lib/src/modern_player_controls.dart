@@ -1038,7 +1038,7 @@ class _ModernPlayerControlsState extends State<ModernPlayerControls> {
           }
         }
       },
-      child: _audioTracks![player.value.activeAudioTrack] != null
+      child: _audioTracks?[player.value.activeAudioTrack] != null
           ? Row(
               children: [
                 const Icon(
