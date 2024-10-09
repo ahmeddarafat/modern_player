@@ -12,11 +12,11 @@ class ModernPlayerMenus {
       useSafeArea: true,
       showDragHandle: true,
       backgroundColor: menuColor,
-      constraints: const BoxConstraints(maxWidth: 400),
+      constraints: const BoxConstraints(maxWidth: 400,maxHeight:800),
       builder: (context) => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-        child: ListView(
-         // mainAxisSize: MainAxisSize.min,
+        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             ...allData.map(
               (e) => InkWell(
