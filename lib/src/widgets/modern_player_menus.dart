@@ -16,7 +16,7 @@ class ModernPlayerMenus {
       builder: (context) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
         child: Column(
-          mainAxisSize: MainAxisSize.min,
+          //mainAxisSize: MainAxisSize.min,
           children: [
             ...allData.map(
               (e) => InkWell(
@@ -71,11 +71,11 @@ class ModernPlayerMenus {
       useSafeArea: true,
       showDragHandle: true,
       backgroundColor: menuColor,
-      constraints: const BoxConstraints(maxWidth: 400),
+      constraints: const BoxConstraints(maxWidth: 400,maxHeight:800),
       builder: (context) => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
         child: Column(
-          mainAxisSize: MainAxisSize.min,
+         // mainAxisSize: MainAxisSize.min,
           children: [
             ...allSpeeds.map(
               (e) => InkWell(
