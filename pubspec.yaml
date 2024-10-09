@@ -15,7 +15,7 @@ dependencies:
   flutter_vlc_player: ^7.4.0
   youtube_explode_dart:
     git:
-      url: https://github.com/amol-d/youtube_explode_dart
+      url: https://github.com/Hexer10/youtube_explode_dart
   wakelock_plus: ^1.1.4
 
 dev_dependencies:
