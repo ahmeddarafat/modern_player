@@ -851,8 +851,8 @@ class _ModernPlayerControlsState extends State<ModernPlayerControls> {
       constraints: const BoxConstraints(maxWidth: 400),
       builder: (context) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
+        child: ListView(
+         // mainAxisSize: MainAxisSize.min,
           children: [
             GestureDetector(
               onTap: () {
