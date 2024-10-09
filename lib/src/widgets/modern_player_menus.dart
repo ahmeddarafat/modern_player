@@ -15,8 +15,8 @@ class ModernPlayerMenus {
       constraints: const BoxConstraints(maxWidth: 400),
       builder: (context) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
+        child: ListView(
+         // mainAxisSize: MainAxisSize.min,
           children: [
             ...allData.map(
               (e) => InkWell(
