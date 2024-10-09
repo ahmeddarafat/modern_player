@@ -14,7 +14,7 @@ class ModernPlayerMenus {
       backgroundColor: menuColor,
       constraints: const BoxConstraints(maxWidth: 400),
       builder: (context) => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
