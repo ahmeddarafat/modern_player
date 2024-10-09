@@ -850,7 +850,7 @@ class _ModernPlayerControlsState extends State<ModernPlayerControls> {
       backgroundColor: getMenuBackgroundColor(),
       constraints: const BoxConstraints(maxWidth: 400),
       builder: (context) => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -884,7 +884,7 @@ class _ModernPlayerControlsState extends State<ModernPlayerControls> {
               ),
             ),
             const SizedBox(
-              height: 30,
+              height: 12,
             ),
             GestureDetector(
               onTap: () {
@@ -923,11 +923,11 @@ class _ModernPlayerControlsState extends State<ModernPlayerControls> {
               ),
             ),
             const SizedBox(
-              height: 30,
+              height: 10,
             ),
             _subtitleRowWidget(context),
             const SizedBox(
-              height: 30,
+              height: 12,
             ),
             _audioRowWidget(context),
             const SizedBox(
