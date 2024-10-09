@@ -848,11 +848,11 @@ class _ModernPlayerControlsState extends State<ModernPlayerControls> {
       useSafeArea: true,
       showDragHandle: true,
       backgroundColor: getMenuBackgroundColor(),
-      constraints: const BoxConstraints(maxWidth: 400),
+      constraints: const BoxConstraints(maxWidth: 700),
       builder: (context) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-        child: ListView(
-         // mainAxisSize: MainAxisSize.min,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             GestureDetector(
               onTap: () {
