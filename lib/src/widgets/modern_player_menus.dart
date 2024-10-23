@@ -60,29 +60,30 @@ class ModernPlayerMenus {
     );
   }
 
-  void showPlabackSpeedOptions(BuildContext context,
-      {required Color menuColor,
-        required String text,
-        required double currentSpeed,
-        required List<double> allSpeeds,
-        required Function(double selectedSpeed) onChnagedSpeed}) {
-    showModalBottomSheet(
-      context: context,
-      useSafeArea: true,
-      showDragHandle: true,
-      backgroundColor: menuColor,
-      constraints: const BoxConstraints(maxWidth: 400,maxHeight:800),
-      builder: (context) => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+  void showPlaybackSpeedOptions(BuildContext context,
+    {required Color menuColor,
+    required String text,
+    required double currentSpeed,
+    required List<double> allSpeeds,
+    required Function(double selectedSpeed) onChangedSpeed}) {
+  showModalBottomSheet(
+    context: context,
+    useSafeArea: true,
+    showDragHandle: true,
+    backgroundColor: menuColor,
+    constraints: const BoxConstraints(maxWidth: 400, maxHeight: 800),
+    builder: (context) => Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+      child: SingleChildScrollView( // Wrap with SingleChildScrollView
         child: Column(
           // mainAxisSize: MainAxisSize.min,
           children: [
             ...allSpeeds.map(
-                  (e) => InkWell(
+              (e) => InkWell(
                 onTap: () {
                   if (e != currentSpeed) {
                     Navigator.pop(context);
-                    onChnagedSpeed.call(e);
+                    onChangedSpeed.call(e);
                   }
                 },
                 child: Container(
@@ -93,7 +94,7 @@ class ModernPlayerMenus {
                         const SizedBox(
                           width: 15,
                           child: Icon(
-                            Icons.access_time_filled_sharp,
+                            Icons.check,
                             color: Colors.white,
                           ),
                         ),
@@ -103,21 +104,20 @@ class ModernPlayerMenus {
                       Text(
                         e == 1 ? text : "${e.toStringAsFixed(2)}x",
                         style:
-                        const TextStyle(color: Colors.white, fontSize: 16),
+                            const TextStyle(color: Colors.white, fontSize: 16),
                       ),
                     ],
                   ),
                 ),
               ),
             ),
-            const SizedBox(
-              height: 10,
-            )
+            const SizedBox(height: 10),
           ],
         ),
       ),
-    );
-  }
+    ),
+  );
+}
 
   void showSubtitleOptions(BuildContext context,
       {required Color menuColor,
