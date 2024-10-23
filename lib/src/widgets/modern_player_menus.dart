@@ -41,7 +41,8 @@ class ModernPlayerMenus {
                           width: e.label == currentData.label ? 20 : 35,
                         ),
                         Text(
-                          e.label,
+                         // e.label,
+                          "Omar Quality: ${e.label}",
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 16,
@@ -103,7 +104,7 @@ class ModernPlayerMenus {
                           width: e == currentSpeed ? 20 : 35,
                         ),
                         Text(
-                          e == 1 ? text : "${e.toStringAsFixed(2)}x",
+                          "Omar playback speed",//e == 1 ? text : "${e.toStringAsFixed(2)}x",
                           style: const TextStyle(
                               color: Colors.white, fontSize: 16),
                         ),
@@ -157,7 +158,7 @@ class ModernPlayerMenus {
                     : 35,
               ),
               Text(
-                e.value,
+                  "Omar subtitle",//e.value,
                 style: const TextStyle(color: Colors.white, fontSize: 16),
               ),
             ],
@@ -252,3 +253,4 @@ class ModernPlayerMenus {
     );
   }
 }
+
