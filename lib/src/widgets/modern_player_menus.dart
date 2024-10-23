@@ -4,58 +4,57 @@ import 'package:modern_player/modern_player.dart';
 class ModernPlayerMenus {
   void showQualityOptions(BuildContext context,
       {required Color menuColor,
-      required ModernPlayerVideoData currentData,
-      required List<ModernPlayerVideoData> allData,
-      required Function(ModernPlayerVideoData videoData) onChangedQuality}) {
+        required ModernPlayerVideoData currentData,
+        required List<ModernPlayerVideoData> allData,
+        required Function(ModernPlayerVideoData videoData) onChangedQuality}) {
     showModalBottomSheet(
       context: context,
       useSafeArea: true,
-      isScrollControlled: true, // Allow the sheet to expand
+      showDragHandle: true,
       backgroundColor: menuColor,
+      constraints: const BoxConstraints(maxWidth: 400,maxHeight:500),
       builder: (context) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              ...allData.map(
-                (e) => InkWell(
-                  onTap: () {
-                    if (e.label != currentData.label) {
-                      Navigator.pop(context);
-                      onChangedQuality.call(e);
-                    }
-                  },
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(vertical: 8),
-                    child: Row(
-                      children: [
-                        if (e.label == currentData.label)
-                          const SizedBox(
-                            width: 15,
-                            child: Icon(
-                              Icons.check_rounded,
-                              color: Colors.white,
-                            ),
-                          ),
-                        SizedBox(
-                          width: e.label == currentData.label ? 20 : 35,
-                        ),
-                        Text(
-                         // e.label,
-                          "Omar Quality: ${e.label}",
-                          style: const TextStyle(
+        child: Column(
+          //mainAxisSize: MainAxisSize.min,
+          children: [
+            ...allData.map(
+                  (e) => InkWell(
+                onTap: () {
+                  if (e.label != currentData.label) {
+                    Navigator.pop(context);
+                    onChangedQuality.call(e);
+                  }
+                },
+                child: Container(
+                  margin: const EdgeInsets.symmetric(vertical: 8),
+                  child: Row(
+                    children: [
+                      if (e.label == currentData.label)
+                        const SizedBox(
+                          width: 15,
+                          child: Icon(
+                            Icons.access_alarm_sharp,
                             color: Colors.white,
-                            fontSize: 16,
                           ),
                         ),
-                      ],
-                    ),
+                      SizedBox(
+                        width: e.label == currentData.label ? 20 : 35,
+                      ),
+                      Text(
+                        e.label,
+                        style:
+                        const TextStyle(color: Colors.white, fontSize: 16),
+                      ),
+                    ],
                   ),
                 ),
               ),
-              const SizedBox(height: 10),
-            ],
-          ),
+            ),
+            const SizedBox(
+              height: 10,
+            )
+          ],
         ),
       ),
     );
@@ -63,61 +62,58 @@ class ModernPlayerMenus {
 
   void showPlabackSpeedOptions(BuildContext context,
       {required Color menuColor,
-      required String text,
-      required double currentSpeed,
-      required List<double> allSpeeds,
-      required Function(double selectedSpeed) onChnagedSpeed}) {
+        required String text,
+        required double currentSpeed,
+        required List<double> allSpeeds,
+        required Function(double selectedSpeed) onChnagedSpeed}) {
     showModalBottomSheet(
       context: context,
       useSafeArea: true,
       showDragHandle: true,
       backgroundColor: menuColor,
-      isScrollControlled: true,
-      constraints: const BoxConstraints(maxWidth: 400),
+      constraints: const BoxConstraints(maxWidth: 400,maxHeight:800),
       builder: (context) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-        child: SingleChildScrollView(
-          child: Column(
-            // mainAxisSize: MainAxisSize.min,
-            children: [
-              ...allSpeeds.map(
-                (e) => InkWell(
-                  onTap: () {
-                    if (e != currentSpeed) {
-                      Navigator.pop(context);
-                      onChnagedSpeed.call(e);
-                    }
-                  },
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(vertical: 8),
-                    child: Row(
-                      children: [
-                        if (e == currentSpeed)
-                          const SizedBox(
-                            width: 15,
-                            child: Icon(
-                              Icons.check_rounded,
-                              color: Colors.white,
-                            ),
+        child: Column(
+          // mainAxisSize: MainAxisSize.min,
+          children: [
+            ...allSpeeds.map(
+                  (e) => InkWell(
+                onTap: () {
+                  if (e != currentSpeed) {
+                    Navigator.pop(context);
+                    onChnagedSpeed.call(e);
+                  }
+                },
+                child: Container(
+                  margin: const EdgeInsets.symmetric(vertical: 8),
+                  child: Row(
+                    children: [
+                      if (e == currentSpeed)
+                        const SizedBox(
+                          width: 15,
+                          child: Icon(
+                            Icons.access_time_filled_sharp,
+                            color: Colors.white,
                           ),
-                        SizedBox(
-                          width: e == currentSpeed ? 20 : 35,
                         ),
-                        Text(
-                          "Omar playback speed",//e == 1 ? text : "${e.toStringAsFixed(2)}x",
-                          style: const TextStyle(
-                              color: Colors.white, fontSize: 16),
-                        ),
-                      ],
-                    ),
+                      SizedBox(
+                        width: e == currentSpeed ? 20 : 35,
+                      ),
+                      Text(
+                        e == 1 ? text : "${e.toStringAsFixed(2)}x",
+                        style:
+                        const TextStyle(color: Colors.white, fontSize: 16),
+                      ),
+                    ],
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 10,
-              )
-            ],
-          ),
+            ),
+            const SizedBox(
+              height: 10,
+            )
+          ],
         ),
       ),
     );
@@ -125,10 +121,10 @@ class ModernPlayerMenus {
 
   void showSubtitleOptions(BuildContext context,
       {required Color menuColor,
-      required int activeTrack,
-      required Map<dynamic, dynamic> allTracks,
-      required Function(MapEntry<dynamic, dynamic> selected)
-          onChangedSubtitle}) {
+        required int activeTrack,
+        required Map<dynamic, dynamic> allTracks,
+        required Function(MapEntry<dynamic, dynamic> selected)
+        onChangedSubtitle}) {
     InkWell subtitleListItelWidget(
         MapEntry<dynamic, dynamic> e, BuildContext context) {
       return InkWell(
@@ -153,12 +149,12 @@ class ModernPlayerMenus {
                 ),
               SizedBox(
                 width: e.value == allTracks[activeTrack] ||
-                        e.key == -1 && allTracks[activeTrack] == null
+                    e.key == -1 && allTracks[activeTrack] == null
                     ? 20
                     : 35,
               ),
               Text(
-                  "Omar subtitle",//e.value,
+                e.value,
                 style: const TextStyle(color: Colors.white, fontSize: 16),
               ),
             ],
@@ -182,7 +178,7 @@ class ModernPlayerMenus {
             children: [
               subtitleListItelWidget(const MapEntry(-1, "None"), context),
               ...allTracks.entries.map(
-                (e) => subtitleListItelWidget(e, context),
+                    (e) => subtitleListItelWidget(e, context),
               )
             ],
           ),
@@ -193,15 +189,14 @@ class ModernPlayerMenus {
 
   void showAudioOptions(BuildContext context,
       {required Color menuColor,
-      required int activeTrack,
-      required Map<dynamic, dynamic> allTracks,
-      required Function(MapEntry<dynamic, dynamic> selectedTrack)
-          onChangedAudio}) {
+        required int activeTrack,
+        required Map<dynamic, dynamic> allTracks,
+        required Function(MapEntry<dynamic, dynamic> selectedTrack)
+        onChangedAudio}) {
     showModalBottomSheet(
       context: context,
       useSafeArea: true,
       showDragHandle: true,
-      isScrollControlled: true,
       backgroundColor: menuColor,
       constraints: const BoxConstraints(maxWidth: 400),
       builder: (context) => Container(
@@ -211,7 +206,7 @@ class ModernPlayerMenus {
             mainAxisSize: MainAxisSize.min,
             children: [
               ...allTracks.entries.map(
-                (e) => InkWell(
+                    (e) => InkWell(
                   onTap: () {
                     if (e.key != activeTrack) {
                       Navigator.pop(context);
@@ -253,4 +248,3 @@ class ModernPlayerMenus {
     );
   }
 }
-
