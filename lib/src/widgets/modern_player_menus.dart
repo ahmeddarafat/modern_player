@@ -60,21 +60,21 @@ class ModernPlayerMenus {
     );
   }
 
-  void showPlaybackSpeedOptions(BuildContext context,
-    {required Color menuColor,
-    required String text,
-    required double currentSpeed,
-    required List<double> allSpeeds,
-    required Function(double selectedSpeed) onChangedSpeed}) {
-  showModalBottomSheet(
-    context: context,
-    useSafeArea: true,
-    showDragHandle: true,
-    backgroundColor: menuColor,
-    constraints: const BoxConstraints(maxWidth: 400, maxHeight: 800),
-    builder: (context) => Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-      child: SingleChildScrollView( // Wrap with SingleChildScrollView
+  void showPlabackSpeedOptions(BuildContext context,
+      {required Color menuColor,
+      required String text,
+      required double currentSpeed,
+      required List<double> allSpeeds,
+      required Function(double selectedSpeed) onChnagedSpeed}) {
+    print('a7a ');
+    showModalBottomSheet(
+      context: context,
+      useSafeArea: true,
+      showDragHandle: true,
+      backgroundColor: menuColor,
+      constraints: const BoxConstraints(maxWidth: 400, maxHeight: 800),
+      builder: (context) => Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
         child: Column(
           // mainAxisSize: MainAxisSize.min,
           children: [
@@ -83,7 +83,7 @@ class ModernPlayerMenus {
                 onTap: () {
                   if (e != currentSpeed) {
                     Navigator.pop(context);
-                    onChangedSpeed.call(e);
+                    onChnagedSpeed.call(e);
                   }
                 },
                 child: Container(
@@ -94,7 +94,7 @@ class ModernPlayerMenus {
                         const SizedBox(
                           width: 15,
                           child: Icon(
-                            Icons.check,
+                            Icons.radar,
                             color: Colors.white,
                           ),
                         ),
@@ -111,14 +111,14 @@ class ModernPlayerMenus {
                 ),
               ),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(
+              height: 10,
+            )
           ],
         ),
       ),
-    ),
-  );
-}
-
+    );
+  }
   void showSubtitleOptions(BuildContext context,
       {required Color menuColor,
         required int activeTrack,
