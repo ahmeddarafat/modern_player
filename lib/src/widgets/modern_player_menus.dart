@@ -10,17 +10,15 @@ class ModernPlayerMenus {
     showModalBottomSheet(
       context: context,
       useSafeArea: true,
-      showDragHandle: true,
+      isScrollControlled: true, // Allow the sheet to expand
       backgroundColor: menuColor,
-      constraints: const BoxConstraints(maxWidth: 400),
       builder: (context) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
         child: SingleChildScrollView(
           child: Column(
-            //mainAxisSize: MainAxisSize.min,
             children: [
               ...allData.map(
-                (e) => InkWell(
+                    (e) => InkWell(
                   onTap: () {
                     if (e.label != currentData.label) {
                       Navigator.pop(context);
@@ -45,21 +43,22 @@ class ModernPlayerMenus {
                         Text(
                           e.label,
                           style: const TextStyle(
-                              color: Colors.white, fontSize: 16),
+                            color: Colors.white,
+                            fontSize: 16,
+                          ),
                         ),
                       ],
                     ),
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 10,
-              )
+              const SizedBox(height: 10),
             ],
           ),
         ),
       ),
     );
+
   }
 
   void showPlabackSpeedOptions(BuildContext context,
@@ -73,49 +72,51 @@ class ModernPlayerMenus {
       useSafeArea: true,
       showDragHandle: true,
       backgroundColor: menuColor,
-      constraints: const BoxConstraints(maxWidth: 400, maxHeight: 800),
+      constraints: const BoxConstraints(maxWidth: 400, maxHeight: 1200),
       builder: (context) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-        child: Column(
-          // mainAxisSize: MainAxisSize.min,
-          children: [
-            ...allSpeeds.map(
-              (e) => InkWell(
-                onTap: () {
-                  if (e != currentSpeed) {
-                    Navigator.pop(context);
-                    onChnagedSpeed.call(e);
-                  }
-                },
-                child: Container(
-                  margin: const EdgeInsets.symmetric(vertical: 8),
-                  child: Row(
-                    children: [
-                      if (e == currentSpeed)
-                        const SizedBox(
-                          width: 15,
-                          child: Icon(
-                            Icons.check_rounded,
-                            color: Colors.white,
+        child: SingleChildScrollView(
+          child: Column(
+            // mainAxisSize: MainAxisSize.min,
+            children: [
+              ...allSpeeds.map(
+                (e) => InkWell(
+                  onTap: () {
+                    if (e != currentSpeed) {
+                      Navigator.pop(context);
+                      onChnagedSpeed.call(e);
+                    }
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(vertical: 8),
+                    child: Row(
+                      children: [
+                        if (e == currentSpeed)
+                          const SizedBox(
+                            width: 15,
+                            child: Icon(
+                              Icons.check_rounded,
+                              color: Colors.white,
+                            ),
                           ),
+                        SizedBox(
+                          width: e == currentSpeed ? 20 : 35,
                         ),
-                      SizedBox(
-                        width: e == currentSpeed ? 20 : 35,
-                      ),
-                      Text(
-                        e == 1 ? text : "${e.toStringAsFixed(2)}x",
-                        style:
-                            const TextStyle(color: Colors.white, fontSize: 16),
-                      ),
-                    ],
+                        Text(
+                          e == 1 ? text : "${e.toStringAsFixed(2)}x",
+                          style:
+                              const TextStyle(color: Colors.white, fontSize: 16),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 10,
-            )
-          ],
+              const SizedBox(
+                height: 10,
+              )
+            ],
+          ),
         ),
       ),
     );
