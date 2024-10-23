@@ -12,7 +12,7 @@ class ModernPlayerMenus {
       useSafeArea: true,
       showDragHandle: true,
       backgroundColor: menuColor,
-      constraints: const BoxConstraints(maxWidth: 400, maxHeight: 500),
+      constraints: const BoxConstraints(maxWidth: 400),
       builder: (context) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
         child: SingleChildScrollView(
