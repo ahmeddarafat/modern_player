@@ -66,7 +66,7 @@ class ModernPlayerMenus {
       required double currentSpeed,
       required List<double> allSpeeds,
       required Function(double selectedSpeed) onChnagedSpeed}) {
-    print('a7a ');
+    
     showModalBottomSheet(
       context: context,
       useSafeArea: true,
