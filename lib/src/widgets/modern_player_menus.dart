@@ -18,7 +18,7 @@ class ModernPlayerMenus {
           child: Column(
             children: [
               ...allData.map(
-                    (e) => InkWell(
+                (e) => InkWell(
                   onTap: () {
                     if (e.label != currentData.label) {
                       Navigator.pop(context);
@@ -58,7 +58,6 @@ class ModernPlayerMenus {
         ),
       ),
     );
-
   }
 
   void showPlabackSpeedOptions(BuildContext context,
@@ -72,7 +71,8 @@ class ModernPlayerMenus {
       useSafeArea: true,
       showDragHandle: true,
       backgroundColor: menuColor,
-      constraints: const BoxConstraints(maxWidth: 400, maxHeight: 1200),
+      isScrollControlled: true,
+      constraints: const BoxConstraints(maxWidth: 400),
       builder: (context) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
         child: SingleChildScrollView(
@@ -104,8 +104,8 @@ class ModernPlayerMenus {
                         ),
                         Text(
                           e == 1 ? text : "${e.toStringAsFixed(2)}x",
-                          style:
-                              const TextStyle(color: Colors.white, fontSize: 16),
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 16),
                         ),
                       ],
                     ),
@@ -200,6 +200,7 @@ class ModernPlayerMenus {
       context: context,
       useSafeArea: true,
       showDragHandle: true,
+      isScrollControlled: true,
       backgroundColor: menuColor,
       constraints: const BoxConstraints(maxWidth: 400),
       builder: (context) => Container(
