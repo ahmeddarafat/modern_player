@@ -12,49 +12,51 @@ class ModernPlayerMenus {
       useSafeArea: true,
       showDragHandle: true,
       backgroundColor: menuColor,
-      constraints: const BoxConstraints(maxWidth: 400,maxHeight:800),
+      constraints: const BoxConstraints(maxWidth: 400, maxHeight: 500),
       builder: (context) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-        child: Column(
-          //mainAxisSize: MainAxisSize.min,
-          children: [
-            ...allData.map(
-              (e) => InkWell(
-                onTap: () {
-                  if (e.label != currentData.label) {
-                    Navigator.pop(context);
-                    onChangedQuality.call(e);
-                  }
-                },
-                child: Container(
-                  margin: const EdgeInsets.symmetric(vertical: 8),
-                  child: Row(
-                    children: [
-                      if (e.label == currentData.label)
-                        const SizedBox(
-                          width: 15,
-                          child: Icon(
-                            Icons.check_rounded,
-                            color: Colors.white,
+        child: SingleChildScrollView(
+          child: Column(
+            //mainAxisSize: MainAxisSize.min,
+            children: [
+              ...allData.map(
+                (e) => InkWell(
+                  onTap: () {
+                    if (e.label != currentData.label) {
+                      Navigator.pop(context);
+                      onChangedQuality.call(e);
+                    }
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(vertical: 8),
+                    child: Row(
+                      children: [
+                        if (e.label == currentData.label)
+                          const SizedBox(
+                            width: 15,
+                            child: Icon(
+                              Icons.check_rounded,
+                              color: Colors.white,
+                            ),
                           ),
+                        SizedBox(
+                          width: e.label == currentData.label ? 20 : 35,
                         ),
-                      SizedBox(
-                        width: e.label == currentData.label ? 20 : 35,
-                      ),
-                      Text(
-                        e.label,
-                        style:
-                            const TextStyle(color: Colors.white, fontSize: 16),
-                      ),
-                    ],
+                        Text(
+                          e.label,
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 16),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 10,
-            )
-          ],
+              const SizedBox(
+                height: 10,
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -71,11 +73,11 @@ class ModernPlayerMenus {
       useSafeArea: true,
       showDragHandle: true,
       backgroundColor: menuColor,
-      constraints: const BoxConstraints(maxWidth: 400,maxHeight:800),
+      constraints: const BoxConstraints(maxWidth: 400, maxHeight: 800),
       builder: (context) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
         child: Column(
-         // mainAxisSize: MainAxisSize.min,
+          // mainAxisSize: MainAxisSize.min,
           children: [
             ...allSpeeds.map(
               (e) => InkWell(
