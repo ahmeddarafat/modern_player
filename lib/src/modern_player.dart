@@ -25,6 +25,7 @@ class ModernPlayer extends StatefulWidget {
       this.controlsOptions,
       this.themeOptions,
       this.translationOptions,
+      this.onPlayerCreated,
       this.callbackOptions});
 
   /// Video quality options for multiple qualities. If you have only one quality video just add one in list.
@@ -56,6 +57,8 @@ class ModernPlayer extends StatefulWidget {
   /// With [callbackOptions] option you can perform custom actions on callback.
   final ModernPlayerCallbackOptions? callbackOptions;
 
+ final void Function(VlcPlayerController controller)? onPlayerCreated;
+
   static Widget createPlayer(
       {required ModernPlayerVideo video,
       List<ModernPlayerSubtitleOptions>? subtitles,
@@ -65,6 +68,7 @@ class ModernPlayer extends StatefulWidget {
       ModernPlayerControlsOptions? controlsOptions,
       ModernPlayerThemeOptions? themeOptions,
       ModernPlayerTranslationOptions? translationOptions,
+      void Function(VlcPlayerController controller)? onPlayerCreated,
       ModernPlayerCallbackOptions? callbackOptions}) {
     return ModernPlayer._(
       video: video,
@@ -76,6 +80,7 @@ class ModernPlayer extends StatefulWidget {
       themeOptions: themeOptions,
       translationOptions: translationOptions,
       callbackOptions: callbackOptions,
+      onPlayerCreated: onPlayerCreated,
     );
   }
 
@@ -199,6 +204,7 @@ class _ModernPlayerState extends State<ModernPlayer> {
     setState(() {
       canDisplayVideo = true;
     });
+    widget.onPlayerCreated?.call(_playerController);
   }
 
   /// Helper function to set default track for subtitle, audio, etc
