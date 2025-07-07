@@ -12,7 +12,8 @@ dependencies:
     sdk: flutter
   visibility_detector: ^0.4.0+2
   screen_brightness: ^1.0.1
-  flutter_vlc_player: null
+  flutter_vlc_player:
+  path: packages/flutter_vlc_player
   youtube_explode_dart:
     git:
       url: https://github.com/Hexer10/youtube_explode_dart
