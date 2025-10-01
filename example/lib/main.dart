@@ -89,7 +89,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 defaultSelectionOptions: ModernPlayerDefaultSelectionOptions(
                     defaultQualitySelectors: [DefaultSelectorLabel('360p')]),
                 video: ModernPlayerVideo.youtubeWithUrl(
-                    url: 'https://www.youtube.com/watch?v=KDEYDTB15XM',
+                    url:
+                        'https://www.youtube.com/watch?v=vEHeI_wBzu0&ab_channel=UntitledStudio',
                     fetchQualities: true),
               ),
             )
