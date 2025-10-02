@@ -194,7 +194,7 @@ To enable multi-window support in your Android application, you need to make cha
 ### With single video
 
 ```dart
-import 'package:modern_player/modern_player.dart';
+import 'package:modern_player/modern_playerr.dart';
 
 final modernPlayerWidget = SizedBox(
     height: 200,
@@ -209,7 +209,7 @@ final modernPlayerWidget = SizedBox(
 ### With youtube video
 
 ```dart
-import 'package:modern_player/modern_player.dart';
+import 'package:modern_player/modern_playerr.dart';
 
 final modernPlayerWidget = SizedBox(
     height: 200,
@@ -222,7 +222,7 @@ final modernPlayerWidget = SizedBox(
 ### With multiple resolution/qualities video
 
 ```dart
-import 'package:modern_player/modern_player.dart';
+import 'package:modern_player/modern_playerr.dart';
 
 final modernPlayerWidget = SizedBox(
     height: 200,

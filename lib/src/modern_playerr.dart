@@ -57,7 +57,7 @@ class ModernPlayer extends StatefulWidget {
   /// With [callbackOptions] option you can perform custom actions on callback.
   final ModernPlayerCallbackOptions? callbackOptions;
 
- final void Function(VlcPlayerController controller)? onPlayerCreated;
+  final void Function(VlcPlayerController controller)? onPlayerCreated;
 
   static Widget createPlayer(
       {required ModernPlayerVideo video,
