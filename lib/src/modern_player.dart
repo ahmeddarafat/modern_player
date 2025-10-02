@@ -141,6 +141,7 @@ class _ModernPlayerState extends State<ModernPlayer> {
           autoPlay: true, autoInitialize: true, hwAcc: HwAcc.auto);
     }
     // Youtube
+    // Youtube  ✅ HARDENED
     else if (defaultSource.sourceType == ModernPlayerSourceType.youtube) {
       final yt = YoutubeExplode();
       youtubeId = defaultSource.source;
@@ -253,6 +254,7 @@ class _ModernPlayerState extends State<ModernPlayer> {
 
       yt.close();
     }
+
     // Asset
     else {
       _playerController = VlcPlayerController.asset(defaultSource.source,
