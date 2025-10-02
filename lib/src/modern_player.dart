@@ -141,57 +141,120 @@ class _ModernPlayerState extends State<ModernPlayer> {
           autoPlay: true, autoInitialize: true, hwAcc: HwAcc.auto);
     }
     // Youtube
+    // Youtube  ✅ HARDENED
     else if (defaultSource.sourceType == ModernPlayerSourceType.youtube) {
-      var yt = YoutubeExplode();
+      final yt = YoutubeExplode();
       youtubeId = defaultSource.source;
-      StreamManifest manifest =
-          await yt.videos.streamsClient.getManifest(youtubeId);
+
+      // Try several client combinations to avoid JS decipher paths.
+      // We log each attempt so you can see which one actually works.
+      final List<List<YoutubeApiClient>> clientCombos = [
+        // Commonly reliable
+        [YoutubeApiClient.ios, YoutubeApiClient.androidVr],
+        // Alt #1
+        [YoutubeApiClient.android, YoutubeApiClient.safari],
+        // Alt #2
+        [YoutubeApiClient.ios, YoutubeApiClient.android],
+        // Alt #3
+        [YoutubeApiClient.tv, YoutubeApiClient.android],
+        // Alt #4
+        [YoutubeApiClient.safari, YoutubeApiClient.androidVr],
+      ];
+
+      Future<StreamManifest> fetchManifestWithClients(String id) async {
+        YoutubeExplodeException? lastYtErr;
+        for (final combo in clientCombos) {
+          try {
+            // Helpful logs in case you need to see which wins
+            // (remove prints in release builds if you prefer).
+            // ignore: avoid_print
+            print('modern_player: trying ytClients $combo for $id');
+            final m = await yt.videos.streams.getManifest(
+              id,
+              ytClients: combo,
+              // fullManifest: true, // uncomment if you want more variants
+            );
+            // Success with this combo
+            return m;
+          } on YoutubeExplodeException catch (e) {
+            lastYtErr = e;
+            if (!e.message.contains('decipher')) {
+              // Non-decipher error (removed, region-locked, age-gated, etc.)
+              rethrow;
+            }
+            // Try next combo on decipher-related failure
+          }
+        }
+        // If we exhausted all combos with decipher issues:
+        throw lastYtErr ??
+            YoutubeExplodeException(
+              'Could not fetch manifest: all clients failed.',
+            );
+      }
+
+      late final StreamManifest manifest;
+      try {
+        manifest = await fetchManifestWithClients(youtubeId!);
+      } finally {
+        // We close later after using the manifest to build controller URLs.
+      }
 
       if (widget.video.fetchQualities ?? false) {
-        List<ModernPlayerVideoData> ytVideos = List.empty(growable: true);
+        final bestAudioUrl =
+            manifest.audioOnly.withHighestBitrate().url.toString();
 
-        for (var element in manifest.videoOnly) {
-          ModernPlayerVideoData videoData =
-              ModernPlayerVideoDataYoutube.network(
-                  label: element.qualityLabel,
-                  url: element.url.toString(),
-                  audioOverride:
-                      manifest.audioOnly.withHighestBitrate().url.toString());
+        final videoOnlySorted = manifest.videoOnly.toList()
+          ..sort(
+            (a, b) => b.bitrate.compareTo(a.bitrate), // 2.5.x API
+          );
 
-          if (ytVideos
-              .where((element) => element.label == videoData.label)
-              .isEmpty) {
-            ytVideos.insert(0, videoData);
+        final ytVideos = <ModernPlayerVideoData>[];
+        for (final v in videoOnlySorted) {
+          final item = ModernPlayerVideoDataYoutube.network(
+            label: v.qualityLabel,
+            url: v.url.toString(),
+            audioOverride: bestAudioUrl,
+          );
+          if (!ytVideos.any((e) => e.label == item.label)) {
+            ytVideos.add(item);
           }
         }
 
         videosData = ytVideos;
 
-        widget.audioTracks.add(ModernPlayerAudioTrackOptions(
-            source: manifest.audioOnly.withHighestBitrate().url.toString(),
-            sourceType: ModernPlayerAudioSourceType.network));
+        widget.audioTracks.add(
+          ModernPlayerAudioTrackOptions(
+            source: bestAudioUrl,
+            sourceType: ModernPlayerAudioSourceType.network,
+          ),
+        );
 
-        ModernPlayerVideoData? defaultSourceYt = _getDefaultTrackSource(
-            selectors: widget.defaultSelectionOptions?.defaultQualitySelectors,
-            trackEntries: ytVideos);
+        final ModernPlayerVideoData? defaultSourceYt = _getDefaultTrackSource(
+          selectors: widget.defaultSelectionOptions?.defaultQualitySelectors,
+          trackEntries: ytVideos,
+        );
 
         selectedQuality = defaultSourceYt ?? defaultSource;
 
         _playerController = VlcPlayerController.network(
-            defaultSourceYt?.source ?? ytVideos.first.source,
-            autoPlay: true,
-            autoInitialize: true,
-            hwAcc: HwAcc.auto);
+          (defaultSourceYt ?? ytVideos.first).source,
+          autoPlay: true,
+          autoInitialize: true,
+          hwAcc: HwAcc.auto,
+        );
       } else {
+        final muxed = manifest.muxed.withHighestBitrate();
         _playerController = VlcPlayerController.network(
-            manifest.muxed.withHighestBitrate().url.toString(),
-            autoPlay: true,
-            autoInitialize: true,
-            hwAcc: HwAcc.auto);
+          muxed.url.toString(),
+          autoPlay: true,
+          autoInitialize: true,
+          hwAcc: HwAcc.auto,
+        );
       }
 
       yt.close();
     }
+
     // Asset
     else {
       _playerController = VlcPlayerController.asset(defaultSource.source,
