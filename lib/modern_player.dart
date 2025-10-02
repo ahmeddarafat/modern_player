@@ -1,5 +1,6 @@
 library modern_player;
 
+export 'src/modern_player.dart' show ModernPlayer;
 export 'src/modern_player_options.dart'
     show
         ModernPlayerVideo,
@@ -18,7 +19,6 @@ export 'src/modern_player_options.dart'
         DefaultSelectorCustom,
         DefaultSelectorLabel,
         DefaultSelectorOff;
-export 'src/modern_playerr.dart' show ModernPlayer;
 export 'src/others/modern_players_enums.dart'
     show
         ModernPlayerSubtitleSourceType,
